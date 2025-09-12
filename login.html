@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <title>تسجيل / دخول / استعادة / تحقق</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ====== الهيدر ====== */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #000;
+        color: #fff;
+        padding: 10px 20px;
+      }
+      header .logo {
+        width: 60px;
+        height: 60px;
+      }
+      header .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      header h1 {
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        flex: 1;
+      }
+      header .account-link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      /* ====== البوكسات ====== */
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 70px); /* عشان ما يخش في الهيدر */
+      }
+      .box {
+        background: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        width: 300px;
+        text-align: center;
+        display: none;
+        position: relative;
+      }
+      .box.active {
+        display: block;
+      }
+      .box h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .input-group {
+        position: relative;
+        width: 100%;
+      }
+      .box input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 14px;
+        color: #007bff;
+      }
+      .box button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .box button:hover {
+        background: #0056b3;
+      }
+      .box a {
+        display: block;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .message {
+        font-size: 14px;
+        color: green;
+        margin: 10px 0;
+      }
+      .error {
+        font-size: 14px;
+        color: red;
+        margin: 10px 0;
+      }
+      .back-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- الهيدر -->
+    <header>
+      <div class="logo">
+        <img src="images/IMG-20250908-WA0011-Photoroom.png" alt="شعار النادي" />
+      </div>
+      <h1>ElMOSTAMARA ONFIRE</h1>
+      <a class="account-link" onclick="showBox('registerBox')">تسجيل حسابك</a>
+    </header>
+
+    <!-- كل النوافذ -->
+    <div class="container">
+      <!-- تسجيل جديد -->
+      <div class="box active" id="registerBox">
+        <span class="back-btn" onclick="showBox('loginBox')">↩</span>
+        <h2>تسجيل جديد</h2>
+        <form onsubmit="event.preventDefault(); sendRegisterCode();">
+          <input type="text" placeholder="اسم المستخدم" required />
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="البريد الإلكتروني"
+            required
+          />
+          <div class="input-group">
+            <input
+              type="password"
+              id="registerPass"
+              placeholder="كلمة المرور"
+              required
+            />
+            <span
+              class="toggle-password"
+              onclick="togglePassword('registerPass')"
+              >👁</span
+            >
+          </div>
+          <button type="submit">تسجيل</button>
+        </form>
+        <a onclick="showBox('loginBox')">مسجل بالفعل؟</a>
+      </div>
+
+      <!-- تسجيل الدخول -->
+      <div class="box" id="loginBox">
+        <span class="back-btn" onclick="showBox('registerBox')">↩</span>
+        <h2>تسجيل الدخول</h2>
+        <form onsubmit="event.preventDefault(); checkLogin();">
+          <input
+            type="text"
+            id="loginUser"
+            placeholder="اسم المستخدم"
+            required
+          />
+          <div class="input-group">
+            <input
+              type="password"
+              id="loginPass"
+              placeholder="كلمة المرور"
+              required
+            />
+            <span class="toggle-password" onclick="togglePassword('loginPass')"
+              >👁</span
+            >
+          </div>
+          <button type="submit">دخول</button>
+        </form>
+        <div id="loginFeedback"></div>
+        <a onclick="showBox('forgotBox')">نسيت كلمة السر؟</a>
+        <a onclick="showBox('registerBox')">تسجيل جديد</a>
+      </div>
+
+      <!-- استعادة الحساب -->
+      <div class="box" id="forgotBox">
+        <span class="back-btn" onclick="showBox('loginBox')">↩</span>
+        <h2>استعادة الحساب</h2>
+        <form onsubmit="event.preventDefault(); sendRecoveryCode();">
+          <input
+            type="email"
+            id="recoverEmail"
+            placeholder="أدخل بريدك الإلكتروني"
+            required
+          />
+          <button type="submit">إرسال كود الاستعادة</button>
+        </form>
+        <a onclick="showBox('loginBox')">رجوع لتسجيل الدخول</a>
+      </div>
+
+      <!-- التحقق من البريد للتسجيل -->
+      <div class="box" id="verifyBox">
+        <span class="back-btn" onclick="showBox('registerBox')">↩</span>
+        <h2>التحقق من البريد</h2>
+        <p id="registerMessage">لقد أرسلنا رمز تحقق إلى بريدك الإلكتروني</p>
+        <form onsubmit="event.preventDefault(); checkRegisterCode();">
+          <input
+            type="text"
+            id="registerCodeInput"
+            placeholder="أدخل رمز التحقق"
+            required
+          />
+          <button type="submit">تأكيد</button>
+        </form>
+        <div id="registerFeedback"></div>
+        <a onclick="showBox('loginBox')">مسجل بالفعل؟ تسجيل دخول</a>
+      </div>
+
+      <!-- التحقق من الاستعادة -->
+      <div class="box" id="recoveryVerifyBox">
+        <span class="back-btn" onclick="showBox('forgotBox')">↩</span>
+        <h2>رمز استعادة الحساب</h2>
+        <p id="recoveryMessage" class="message">تم إرسال كود التحقق لبريدك</p>
+        <form onsubmit="event.preventDefault(); checkRecoveryCode();">
+          <input
+            type="text"
+            id="recoveryCodeInput"
+            placeholder="أدخل الكود"
+            required
+          />
+          <button type="submit">تأكيد</button>
+        </form>
+        <div id="recoveryFeedback"></div>
+      </div>
+    </div>
+
+    <script>
+      function showBox(id) {
+        document
+          .querySelectorAll(".box")
+          .forEach((box) => box.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+      }
+
+      function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+      }
+
+      function checkLogin() {
+        document.getElementById("loginFeedback").innerHTML =
+          "<p class='message'>🔒 التحقق من بيانات الدخول سيتم من الخادم</p>";
+      }
+
+      function sendRegisterCode() {
+        const email = document.getElementById("registerEmail").value;
+        if (email) {
+          document.getElementById("registerMessage").innerText =
+            "📧 تم إرسال كود التحقق إلى بريدك (" + email + ")";
+          document.getElementById("registerFeedback").innerHTML = "";
+          showBox("verifyBox");
+        }
+      }
+
+      function checkRegisterCode() {
+        document.getElementById("registerFeedback").innerHTML =
+          "<p class='message'>🔒 التحقق من الكود سيتم من الخادم</p>";
+      }
+
+      function sendRecoveryCode() {
+        const email = document.getElementById("recoverEmail").value;
+        if (email) {
+          document.getElementById("recoveryMessage").innerText =
+            "📧 تم إرسال كود التحقق إلى بريدك (" + email + ")";
+          document.getElementById("recoveryFeedback").innerHTML = "";
+          showBox("recoveryVerifyBox");
+        }
+      }
+
+      function checkRecoveryCode() {
+        document.getElementById("recoveryFeedback").innerHTML =
+          "<p class='message'>🔒 التحقق من الكود سيتم من الخادم</p>";
+      }
+    </script>
+  </body>
+</html>

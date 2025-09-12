@@ -1,0 +1,259 @@
+.logo {
+  height: 100px;
+  width: auto;
+  display: block;
+  margin: 0;
+}
+
+.navbar {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1;
+}
+
+.navbar .container {
+  align-items: center;
+}
+
+
+.navbar-brand,
+.nav-link {
+  color: #ffffff !important;
+}
+
+#navbar {
+  background-color: rgba(37, 36, 36, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link:hover {
+  color: rgb(118, 241, 113) !important;
+}
+
+
+body,
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
+
+
+
+
+
+#services hr,
+#table hr,
+.groups hr,
+.hr {
+  width: 120px;
+  height: 3px;
+  background-color: #81C784;
+  margin: 0 auto;
+  opacity: 1;
+  margin-top: 20px;
+}
+
+#services {
+  color: #18dd22;
+  background: url("WhatsApp Image 2025-09-08 at 12.06.39 AM.jpeg");
+
+}
+
+#table {
+  color: #18dd22;
+
+}
+
+#table3 {
+  color: #18dd22;
+  background: url("WhatsApp Image 2025-09-08 at 12.11.34 AM.jpeg");
+
+}
+
+#table2 {
+  color: #18dd22;
+  background: url("WhatsApp Image 2025-09-08 at 12.09.36 AM.jpeg");
+
+}
+
+.feature li {
+  background: #f8f9fa;
+  border-radius: 5px;
+
+  box-shadow: 0 4px 10px rgb(94, 6, 175, 0.1) !important;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+#services h6,
+#table h6 {
+  color: #3f3e3e;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #03ba03;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgb(94, 6, 175, 0.2);
+
+}
+
+.card {
+  /* direction: rtl; */
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2) !important;
+  opacity: 1;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  border-radius: 20px;
+  height: 100%;
+}
+
+.card:hover,
+.feature li:hover {
+  box-shadow: 0 4px 10px rgba(49, 49, 49, 0.3) !important;
+  transform: translateY(-10px) !important;
+}
+
+#home .m {
+  padding-top: 200px !important;
+}
+
+
+.link-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-left: 5px;
+  background: #01408e;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.link-btn:hover {
+  background: #0056b3;
+}
+
+
+.team-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.stats div {
+  width: 25px;
+  text-align: center;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #60a5fa;
+  padding-right: 20px;
+}
+
+h2 {
+  color: #60a5fa;
+}
+
+#matchesList {
+  background: #001f3f;
+  margin: 0 !important;
+  padding: 20px;
+  color: #013282
+}
+
+.list h1 {
+  text-align: center;
+  color: #ffffff;
+}
+
+.list {
+  max-width: 100%;
+  margin: 20px auto;
+  display: grid;
+  gap: 15px;
+  margin-bottom: 0px !important;
+}
+
+.match {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .05)
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px
+}
+
+.match-title {
+  font-weight: bold;
+  font-size: 18px
+}
+
+.countdown {
+  color: #01408e;
+  font-size: 14px
+}
+
+.countdown.closed {
+  color: #130bec;
+  font-weight: bold
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 15px;
+  border: 3px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 8px
+}
+
+input:disabled {
+  background: #f0f0f0;
+  color: #666
+}
+
+button {
+  background: #01408e;
+  color: #fff;
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 8px !important;
+  cursor: pointer;
+  font-weight: bold
+}
+
+button:disabled {
+  background: #999;
+  cursor: not-allowed
+}
+
+.saved {
+  font-size: 13px;
+  margin-top: 5px
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: 50px !important;
+    align-items: center;
+
+  }
+}
