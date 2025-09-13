@@ -15,9 +15,9 @@
 
     header {
       background: #000000;
-      padding: 10px 0 15px; /* مسافة داخلية بدل margin */
+      padding: 10px 0 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      margin-bottom: 0; /* شيلنا المسافة الفاضية */
+      margin-bottom: 0;
     }
 
     header img {
@@ -27,18 +27,18 @@
     }
 
     h1 {
-      margin: 10px 0; /* تقليل المسافة */
+      margin: 10px 0;
       color: #333;
       font-size: 24px;
     }
 
     .match, .stats {
       background: #fff;
-      margin: 15px auto;
+      margin: 10px 0;      /* مفيش auto => مفيش فراغ من الجنب */
       padding: 20px;
-      width: 95%;
+      width: 100%;         /* تملى الشاشة كلها */
       max-width: 100%;
-      border-radius: 10px;
+      border-radius: 0;    /* عشان تلزق لحد الأطراف */
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       text-align: center;
     }
@@ -71,7 +71,7 @@
       background: #fafafa;
       margin: 10px 0;
       padding: 15px;
-      border-radius: 8px;
+      border-radius: 0;
       text-align: left;
     }
 
