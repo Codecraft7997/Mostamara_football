@@ -15,9 +15,9 @@
 
     header {
       background: #000000;
-      padding: 0px;
+      padding: 10px 0 15px; /* مسافة داخلية بدل margin */
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+      margin-bottom: 0; /* شيلنا المسافة الفاضية */
     }
 
     header img {
@@ -27,13 +27,14 @@
     }
 
     h1 {
-      margin: 20px 0;
+      margin: 10px 0; /* تقليل المسافة */
       color: #333;
+      font-size: 24px;
     }
 
     .match, .stats {
       background: #fff;
-      margin: 20px auto;
+      margin: 15px auto;
       padding: 20px;
       width: 95%;
       max-width: 100%;
@@ -57,7 +58,7 @@
 
     .stats {
       display: none;
-      padding: 30px;
+      padding: 25px;
     }
 
     .stats h2 {
