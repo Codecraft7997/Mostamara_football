@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الأدوار النهائية</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #ffe6cc;
+    }
+
+    header {
+      background: #000000;
+      padding: 0px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    header img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #333;
+    }
+
+    .match, .stats {
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .match a {
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 18px;
+      display: block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .match a:hover {
+      color: #0056b3;
+    }
+
+    .stats {
+      display: none;
+      padding: 30px;
+    }
+
+    .stats h2 {
+      margin-bottom: 15px;
+    }
+
+    .team-stats {
+      display: flex;
+      justify-content: space-between;
+      background: #fafafa;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .team {
+      width: 45%;
+    }
+
+    .team h3 {
+      margin-top: 0;
+      text-align: center;
+      color: #444;
+    }
+
+    .team ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .team ul li {
+      margin: 5px 0;
+      font-size: 15px;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- اللوجو -->
+  <header>
+    <img src="images/IMG-20250908-WA0011-Photoroom.png" alt="شعار البطولة">
+  </header>
+
+  <h1 id="page-title">الأدوار النهائية</h1>
+
+  <!-- قائمة الماتشات -->
+  <div id="matches">
+    <div class="match">
+      <h2>محمود سعد VS العشري (الذهاب)</h2>
+      <p>النتيجة:3/1 لصالح محمود سعد</p>
+      <a onclick="showStats(1)">عرض إحصائيات الماتش</a>
+    </div>
+
+    <div class="match">
+      <h2>السلسول VS العربي (الذهاب)</h2>
+      <p>النتيجة: لم تبدأ</p>
+      <a onclick="showStats(2)">عرض إحصائيات الماتش</a>
+    </div>
+
+    <div class="match">
+      <h2>محمود سعد VS العشري (العودة)</h2>
+      <p>النتيجة: لم تبدأ</p>
+      <a onclick="showStats(3)">عرض إحصائيات الماتش</a>
+    </div>
+
+    <div class="match">
+      <h2>السلسول VS العربي (العودة)</h2>
+      <p>النتيجة: لم تبدأ</p>
+      <a onclick="showStats(4)">عرض إحصائيات الماتش</a>
+    </div>
+  </div>
+
+  <!-- صفحات الإحصائيات -->
+  <div id="stats1" class="stats" style="background:#d6f0ff;">
+    <h2>محمود سعد VS العشري (الذهاب)</h2>
+    <p>النتيجة النهائية:3/1 لصالح محمود </p>
+
+    <div class="team-stats">
+      <div class="team">
+        <h3>محمود سعد</h3>
+        <ul>
+        </li>⚽محمود سعد</li>
+        <li>⚽عادل محمد </li>
+        </li>⚽مروان ياسر</li>
+        </ul>
+      </div>
+      <div class="team">
+        <h3>العشري</h3>
+        <ul>
+          <li>⚽محمد اسامه</li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div id="stats2" class="stats" style="background:#d9f7d9;">
+    <h2>السلسول VS العربي (الذهاب)</h2>
+    <p>النتيجة النهائية: لم تبدأ</p>
+
+    <div class="team-stats">
+      <div class="team">
+        <h3>السلسول</h3>
+        <ul>
+          <li>لا يوجد</li>
+        </ul>
+      </div>
+      <div class="team">
+        <h3>العربي</h3>
+        <ul>
+          <li>لا يوجد</li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div id="stats3" class="stats" style="background:#fff9d6;">
+    <h2>محمود سعد VS العشري (العودة)</h2>
+    <p>النتيجة النهائية: لم تبدأ</p>
+
+    <div class="team-stats">
+      <div class="team">
+        <h3>محمود سعد</h3>
+        <ul>
+          <li>لا يوجد</li>
+        </ul>
+      </div>
+      <div class="team">
+        <h3>العشري</h3>
+        <ul>
+          <li>لا يوجد</li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div id="stats4" class="stats" style="background:#ffe6f0;">
+    <h2>السلسول VS العربي (العودة)</h2>
+    <p>النتيجة النهائية: لم تبدأ</p>
+
+    <div class="team-stats">
+      <div class="team">
+        <h3>السلسول</h3>
+        <ul>
+          <li>لا يوجد</li>
+        </ul>
+      </div>
+      <div class="team">
+        <h3>العربي</h3>
+        <ul>
+          <li>لا يوجد</li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <script>
+    function showStats(num) {
+      document.getElementById("matches").style.display = "none";
+      document.getElementById("page-title").innerText = "إحصائيات الماتش";
+      document.getElementById("stats" + num).style.display = "block";
+    }
+
+    function goBack() {
+      document.getElementById("matches").style.display = "block";
+      document.getElementById("page-title").innerText = "الأدوار النهائية";
+      let stats = document.querySelectorAll(".stats");
+      stats.forEach(s => s.style.display = "none");
+    }
+  </script>
+</body>
+</html>

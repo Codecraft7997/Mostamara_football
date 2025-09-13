@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Round 3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #000000;
+      padding: 0px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    header img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #333;
+    }
+
+    .match, .stats {
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .match a {
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 18px;
+      display: block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .match a:hover {
+      color: #0056b3;
+    }
+
+    .stats {
+      display: none;
+      padding: 40px;
+    }
+
+    .stats h2 {
+      margin-bottom: 15px;
+    }
+
+    .goals {
+      text-align: right;
+      margin-top: 15px;
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- اللوجو -->
+  <header>
+    <img src="images/IMG-20250908-WA0011-Photoroom.png" alt="شعار البطولة">
+  </header>
+
+  <h1 id="page-title">Round 3</h1>
+
+  <!-- قائمة الماتشات -->
+  <div id="matches">
+    <div class="match">
+      <h2>محمد فتحي VS العشري</h2>
+      <p>النتيجة: 5/0 لصالح العشري</p>
+      <a onclick="showStats(1)">عرض إحصائيات الماتش</a>
+    </div>
+
+    <div class="match">
+      <h2>العربي VS يوسف شوقي</h2>
+      <p>النتيجة: 5/3 لصالح العربي</p>
+      <a onclick="showStats(2)">عرض إحصائيات الماتش</a>
+    </div>
+
+    <div class="match">
+      <h2>السلسول VS السبخاوية</h2>
+      <p>النتيجة: 3/3</p>
+      <a onclick="showStats(3)">عرض إحصائيات الماتش</a>
+    </div>
+
+    <div class="match">
+      <h2>محمود سعد VS الألماني</h2>
+      <p>النتيجة: 2/0 لصالح محمود سعد</p>
+      <a onclick="showStats(4)">عرض إحصائيات الماتش</a>
+    </div>
+  </div>
+
+  <!-- صفحات الإحصائيات -->
+  <div id="stats1" class="stats" style="background:#d6f0ff;">
+    <h2>محمد فتحي VS العشري</h2>
+    <p>النتيجة النهائية: 5/0 لصالح العشري</p>
+    <div class="goals">
+      <strong>محمد فتحي:</strong><br>
+      - لا يوجد<br>
+
+      <strong>العشري:</strong><br>
+      - محمد اسامه<br>
+      - محمد اسامه<br>
+      - عمرو خالد<br>
+      - محمود علي<br>
+      - احمد محمد<br>
+    </div>
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div id="stats2" class="stats" style="background:#d9f7d9;">
+    <h2>العربي VS يوسف شوقي</h2>
+    <p>النتيجة النهائية: 5/3 لصالح العربي</p>
+    <div class="goals">
+      <strong>العربي:</strong><br>
+      - طه جمال<br>
+      - طه جمال<br>
+      - طه جمال<br>
+      - طه جمال<br>
+      - رامي حماده<br>
+
+      <strong>يوسف شوقي:</strong><br>
+      - يوسف شوقي<br>
+      - يوسف شوقي<br>
+      - محمد مدحت<br>
+    </div>
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div id="stats3" class="stats" style="background:#fff9d6;">
+    <h2>السلسول VS السبخاوية</h2>
+    <p>النتيجة النهائية: 3/3</p>
+    <div class="goals">
+      <strong>السلسول:</strong><br>
+      - عطيه اسعد<br>
+      - عطيه اسعد<br>
+      - عطيه اسعد<br>
+
+      <strong>السبخاوية:</strong><br>
+      - يوسف عطا<br>
+      - احمد سمير<br>
+      - علي الاسطي<br>
+    </div>
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div id="stats4" class="stats" style="background:#ffe6f0;">
+    <h2>محمود سعد VS الألماني</h2>
+    <p>النتيجة النهائية: 2/0 لصالح محمود سعد</p>
+    <div class="goals">
+      انسحاب الالماني واعتبار محمود سعد فائز بنتيجة: 2/0
+    </div>
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <script>
+    function showStats(num) {
+      document.getElementById("matches").style.display = "none";
+      document.getElementById("page-title").innerText = "إحصائيات الماتش";
+      document.getElementById("stats" + num).style.display = "block";
+    }
+
+    function goBack() {
+      document.getElementById("matches").style.display = "block";
+      document.getElementById("page-title").innerText = "Round 3";
+      let stats = document.querySelectorAll(".stats");
+      stats.forEach(s => s.style.display = "none");
+    }
+  </script>
+</body>
+</html>

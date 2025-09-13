@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نهائي البطولة</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #fcefe6;
+    }
+
+    header {
+      background: #040000;
+      padding: 0px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    header img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #333;
+    }
+
+    .match, .stats {
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .match a {
+      text-decoration: none;
+      color: #d35400;
+      font-size: 18px;
+      display: block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .match a:hover {
+      color: #a84300;
+    }
+
+    .stats {
+      display: none;
+      padding: 30px;
+    }
+
+    .stats h2 {
+      margin-bottom: 15px;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #d35400;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #a84300;
+    }
+  </style>
+</head>
+<body>
+  <!-- اللوجو -->
+  <header>
+    <img src="images/IMG-20250908-WA0011-Photoroom.png" alt="شعار البطولة">
+  </header>
+
+  <h1 id="page-title">نهائي البطولة</h1>
+
+  <!-- الماتش -->
+  <div id="matches">
+    <div class="match">
+      <h2>____ VS ____</h2>
+      <p>لم تحدد الفرق الصاعدة</p>
+      <a onclick="showStats()">عرض إحصائيات الماتش</a>
+    </div>
+  </div>
+
+  <!-- صفحة الإحصائيات -->
+  <div id="stats" class="stats" style="background:#ffe6f0;">
+    <h2>____ VS ____</h2>
+    <p>لم تحدد الفرق الصاعدة</p>
+    <button class="back-btn" onclick="goBack()">رجوع</button>
+  </div>
+
+  <script>
+    function showStats() {
+      document.getElementById("matches").style.display = "none";
+      document.getElementById("page-title").innerText = "إحصائيات الماتش";
+      document.getElementById("stats").style.display = "block";
+    }
+
+    function goBack() {
+      document.getElementById("matches").style.display = "block";
+      document.getElementById("page-title").innerText = "نهائي البطولة";
+      document.getElementById("stats").style.display = "none";
+    }
+  </script>
+</body>
+</html>
