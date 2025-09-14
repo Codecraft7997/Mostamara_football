@@ -1,3 +1,10 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
 .logo {
   height: 100px;
   width: auto;
@@ -244,15 +251,37 @@ button {
   cursor: pointer;
   font-weight: bold
 }
-#group-b ,#group-a{
+/* #group-b ,#group-a{
 
-  height: 100vh; /* ارتفاع الشاشة */
-  width: 100%;   /* العرض بالكامل */
-  overflow: hidden;
 object-fit: contain;
+ height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0% !important;
+  margin: 0% !important;
 
 
 }
+
+#group-b img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  
+  display: block;     
+  
+  margin: 0% !important;
+} */
+/* #group-b {
+      height: 100vh;  
+      width: 100%;     
+      overflow: hidden;
+    }
+   #group-b img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;  
+      display: block;
+    } */
 button:disabled {
   background: #999;
   cursor: not-allowed
