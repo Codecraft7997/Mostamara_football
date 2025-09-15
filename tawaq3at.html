@@ -143,8 +143,6 @@
     3: new Date("2025-09-19T20:00:00"),
   };
 
-  let predictions1 = [], predictions2 = [], predictions3 = [];
-
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
     const target = document.getElementById(id);
@@ -160,7 +158,7 @@
   }
 
   async function sendToGoogle(matchNumber, name, prediction, time) {
-    const url = "https://script.google.com/macros/s/AKfycbyCe6c5e7_1TBh7cvZrzdIrs8pZ_leWr-XDmSAFtRnRb1z6dxb6X04P3Jl0l7TIGTU/exec";
+    const url = "https://script.google.com/macros/s/AKfycbyd51nHoCtYNV9Zh-jfiLuywgyv2DHGqJdGQ61kN0CUimZdyQWLU0E7-XLq-_O2s9E/exec";
     const data = { match: matchNumber, name, prediction, time };
     try {
       await fetch(url, {
@@ -204,7 +202,7 @@
   }
 
   async function getPredictionsFromGoogle(matchNumber) {
-    const url = `https://script.google.com/macros/s/AKfycbyCe6c5e7_1TBh7cvZrzdIrs8pZ_leWr-XDmSAFtRnRb1z6dxb6X04P3Jl0l7TIGTU/exec?match=${matchNumber}`;
+    const url = `https://script.google.com/macros/s/AKfycbyd51nHoCtYNV9Zh-jfiLuywgyv2DHGqJdGQ61kN0CUimZdyQWLU0E7-XLq-_O2s9E/exec?match=${matchNumber}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -216,7 +214,7 @@
   }
 
   async function showPredictions(matchNumber) {
-    document.getElementById(`predictionsPage${matchNumber}`).style.display = "block";
+    showPage(`predictionsPage${matchNumber}`);
     const container = document.getElementById(`predictionsContainer${matchNumber}`);
     container.innerHTML = "<p>جاري تحميل التوقعات...</p>";
 
@@ -231,13 +229,13 @@
     data.forEach((p, i) => {
       const div = document.createElement("div");
       div.className = "prediction";
-      div.innerHTML = `<strong>${i + 1}. ${p.name}: ${p.prediction}</strong><br><span class="timestamp">(${p.time})</span>`;
+      div.innerHTML = `<strong>${i + 1}. ${p.name || "❌"}: ${p.prediction || "❌"}</strong><br><span class="timestamp">(${p.time || "?"})</span>`;
       container.appendChild(div);
     });
   }
 
   function hidePredictions(matchNumber) {
-    document.getElementById(`predictionsPage${matchNumber}`).style.display = "none";
+    showPage(matchNumber === 3 ? "finalPage" : "semisPage");
   }
 
   function disableInputs(matchNumber) {
