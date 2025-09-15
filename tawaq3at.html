@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -137,130 +138,119 @@
   </div>
 
 <script>
+  const deadlines = {
+    1: new Date("2025-09-15T20:00:00"),
+    2: new Date("2025-09-16T20:00:00"),
+    3: new Date("2025-09-19T20:00:00"),
+  };
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbyCe6c5e7_1TBh7cvZrzdIrs8pZ_leWr-XDmSAFtRnRb1z6dxb6X04P3Jl0l7TIGTU/exec";
+  let predictions1 = [], predictions2 = [], predictions3 = [];
 
-const deadlines = {
-  1: new Date("2025-09-15T20:00:00"),
-  2: new Date("2025-09-16T20:00:00"),
-  3: new Date("2025-09-19T20:00:00")
-};
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
-}
-
-function formatTimestamp(date) {
-  return date.toLocaleString("ar-EG");
-}
-
-function isDeadlinePassed(matchNumber) {
-  return new Date() >= deadlines[matchNumber];
-}
-
-function submitPrediction(matchNumber) {
-  if (isDeadlinePassed(matchNumber)) {
-    alert("انتهى وقت التوقعات!");
-    return;
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    const target = document.getElementById(id);
+    if (target) target.style.display = 'block';
+    else console.error("الصفحة غير موجودة:", id);
   }
 
-  const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
-  const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
-
-  if (!name || !prediction) {
-    alert("من فضلك اكتب اسمك وتوقعك.");
-    return;
+  function formatTimestamp(date) {
+    return date.toLocaleString("ar-EG");
   }
 
-  fetch(scriptURL, {
-    method: 'POST',
-    body: new URLSearchParams({
-      action: 'submit',
-      match: matchNumber,
-      name: name,
-      text: prediction,
-      time: formatTimestamp(new Date())
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === "duplicate") {
-      alert("❌ هذا الاسم قد أرسل توقعاً بالفعل.");
-    } else {
-      alert("✅ تم حفظ التوقع.");
-      document.getElementById(`nameInput${matchNumber}`).value = "";
-      document.getElementById(`predictionInput${matchNumber}`).value = "";
+  function isDeadlinePassed(matchNumber) {
+    return new Date() >= deadlines[matchNumber];
+  }
+
+  function submitPrediction(matchNumber) {
+    if (isDeadlinePassed(matchNumber)) {
+      alert("انتهى وقت التوقعات!");
+      return;
     }
-  })
-  .catch(err => {
-    alert("حدث خطأ أثناء الإرسال.");
-    console.error(err);
-  });
-}
 
-function showPredictions(matchNumber) {
-  document.getElementById(`predictionsPage${matchNumber}`).style.display = "block";
-  const container = document.getElementById(`predictionsContainer${matchNumber}`);
-  container.innerHTML = "جاري تحميل التوقعات...";
+    const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
+    const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
+    if (!name || !prediction) {
+      alert("من فضلك اكتب اسمك وتوقعك.");
+      return;
+    }
 
-  fetch(scriptURL + `?action=get&match=${matchNumber}`)
-    .then(res => res.json())
-    .then(data => {
-      if (!data || data.length === 0) {
-        container.innerHTML = "<p>لا توجد توقعات بعد.</p>";
-        return;
-      }
+    const key = `predictions_match${matchNumber}`;
+    const list = matchNumber === 1 ? predictions1 : matchNumber === 2 ? predictions2 : predictions3;
+    if (list.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+      alert("❌ هذا الاسم قد أرسل توقعاً بالفعل.");
+      return;
+    }
 
-      container.innerHTML = "";
-      data.forEach((p, i) => {
-        const div = document.createElement("div");
-        div.className = "prediction";
-        div.innerHTML = `<strong>${i + 1}. ${p.name}: ${p.text}</strong><br><span class="timestamp">(${p.time})</span>`;
-        container.appendChild(div);
-      });
-    })
-    .catch(() => {
-      container.innerHTML = "<p>حدث خطأ في تحميل التوقعات.</p>";
-    });
-}
-
-function hidePredictions(matchNumber) {
-  document.getElementById(`predictionsPage${matchNumber}`).style.display = "none";
-}
-
-function disableInputs(matchNumber) {
-  document.getElementById(`nameInput${matchNumber}`).disabled = true;
-  document.getElementById(`predictionInput${matchNumber}`).disabled = true;
-  document.getElementById(`submitBtn${matchNumber}`).disabled = true;
-}
-
-function updateCountdown(matchNumber) {
-  const countdown = document.getElementById(`countdown${matchNumber}`);
-  const message = document.getElementById(`timeMessage${matchNumber}`);
-  const now = new Date();
-  const timeLeft = deadlines[matchNumber] - now;
-
-  if (timeLeft <= 0) {
-    countdown.textContent = "";
-    message.textContent = "⚠ انتهى وقت التوقعات!";
-    disableInputs(matchNumber);
-    return;
+    const entry = { name, text: prediction, time: formatTimestamp(new Date()) };
+    list.unshift(entry);
+    localStorage.setItem(key, JSON.stringify(list));
+    alert("✅ تم حفظ التوقع.");
+    document.getElementById(`nameInput${matchNumber}`).value = "";
+    document.getElementById(`predictionInput${matchNumber}`).value = "";
   }
 
-  const h = Math.floor(timeLeft / (1000 * 60 * 60));
-  const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-  const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
-  countdown.textContent = `الوقت المتبقي: ${h} ساعة و ${m} دقيقة و ${s} ثانية`;
-}
+  function showPredictions(matchNumber) {
+    document.getElementById(`predictionsPage${matchNumber}`).style.display = "block";
+    const container = document.getElementById(`predictionsContainer${matchNumber}`);
+    container.innerHTML = "";
+    const key = `predictions_match${matchNumber}`;
+    const saved = localStorage.getItem(key);
+    if (!saved) return container.innerHTML = "<p>لا توجد توقعات بعد.</p>";
 
-window.onload = function () {
-  [1, 2, 3].forEach(num => {
-    updateCountdown(num);
-    setInterval(() => updateCountdown(num), 1000);
-  });
-};
+    const data = JSON.parse(saved);
+    if (matchNumber === 1) predictions1 = data;
+    else if (matchNumber === 2) predictions2 = data;
+    else predictions3 = data;
 
+    data.forEach((p, i) => {
+      const div = document.createElement("div");
+      div.className = "prediction";
+      div.innerHTML = `<strong>${i + 1}. ${p.name}: ${p.text}</strong><br><span class="timestamp">(${p.time})</span>`;
+      container.appendChild(div);
+    });
+  }
+
+  function hidePredictions(matchNumber) {
+    document.getElementById(`predictionsPage${matchNumber}`).style.display = "none";
+  }
+
+  function disableInputs(matchNumber) {
+    document.getElementById(`nameInput${matchNumber}`).disabled = true;
+    document.getElementById(`predictionInput${matchNumber}`).disabled = true;
+    document.getElementById(`submitBtn${matchNumber}`).disabled = true;
+  }
+
+  function updateCountdown(matchNumber) {
+    const countdown = document.getElementById(`countdown${matchNumber}`);
+    const message = document.getElementById(`timeMessage${matchNumber}`);
+    const now = new Date();
+    const timeLeft = deadlines[matchNumber] - now;
+
+    if (timeLeft <= 0) {
+      countdown.textContent = "";
+      message.textContent = "⚠ انتهى وقت التوقعات!";
+      disableInputs(matchNumber);
+      return;
+    }
+
+    const h = Math.floor(timeLeft / (1000 * 60 * 60));
+    const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    countdown.textContent = `الوقت المتبقي: ${h} ساعة و ${m} دقيقة و ${s} ثانية`;
+  }
+
+  window.onload = function () {
+    [1, 2, 3].forEach(num => {
+      const saved = localStorage.getItem(`predictions_match${num}`);
+      if (saved) {
+        if (num === 1) predictions1 = JSON.parse(saved);
+        else if (num === 2) predictions2 = JSON.parse(saved);
+        else predictions3 = JSON.parse(saved);
+      }
+      updateCountdown(num);
+      setInterval(() => updateCountdown(num), 1000);
+    });
+  };
 </script>
 </body>
 </html>
