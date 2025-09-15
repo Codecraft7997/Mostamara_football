@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -162,31 +161,47 @@
   }
 
   function submitPrediction(matchNumber) {
-    if (isDeadlinePassed(matchNumber)) {
-      alert("انتهى وقت التوقعات!");
-      return;
-    }
+    try {
+      if (isDeadlinePassed(matchNumber)) {
+        alert("انتهى وقت التوقعات!");
+        return;
+      }
 
-    const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
-    const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
-    if (!name || !prediction) {
-      alert("من فضلك اكتب اسمك وتوقعك.");
-      return;
-    }
+      const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
+      const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
 
-    const key = `predictions_match${matchNumber}`;
-    const list = matchNumber === 1 ? predictions1 : matchNumber === 2 ? predictions2 : predictions3;
-    if (list.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-      alert("❌ هذا الاسم قد أرسل توقعاً بالفعل.");
-      return;
-    }
+      console.log("Name:", name);
+      console.log("Prediction:", prediction);
 
-    const entry = { name, text: prediction, time: formatTimestamp(new Date()) };
-    list.unshift(entry);
-    localStorage.setItem(key, JSON.stringify(list));
-    alert("✅ تم حفظ التوقع.");
-    document.getElementById(`nameInput${matchNumber}`).value = "";
-    document.getElementById(`predictionInput${matchNumber}`).value = "";
+      if (!name || !prediction) {
+        alert("من فضلك اكتب اسمك وتوقعك.");
+        return;
+      }
+
+      const key = `predictions_match${matchNumber}`;
+      const list = matchNumber === 1 ? predictions1 : matchNumber === 2 ? predictions2 : predictions3;
+
+      if (list.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+        alert("❌ هذا الاسم قد أرسل توقعاً بالفعل.");
+        return;
+      }
+
+      const entry = {
+        name,
+        text: prediction,
+        time: formatTimestamp(new Date())
+      };
+
+      list.unshift(entry);
+      localStorage.setItem(key, JSON.stringify(list));
+
+      alert("✅ تم حفظ التوقع.");
+      document.getElementById(`nameInput${matchNumber}`).value = "";
+      document.getElementById(`predictionInput${matchNumber}`).value = "";
+    } catch (err) {
+      console.error("حدث خطأ أثناء إرسال التوقع:", err);
+      alert("❌ حدث خطأ أثناء إرسال التوقع، حاول مرة أخرى.");
+    }
   }
 
   function showPredictions(matchNumber) {
