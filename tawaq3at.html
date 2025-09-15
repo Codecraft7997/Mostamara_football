@@ -1,254 +1,110 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>التوقعات</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #121212;
+      color: white;
       text-align: center;
-      padding: 30px;
-      color: white;
-      margin: 0;
-    }
-    h1, h2 {
-      color: white;
-    }
-    button {
-      background-color: #1e90ff;
-      color: white;
-      padding: 15px 30px;
-      margin: 20px;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      border-radius: 8px;
-    }
-    button:hover {
-      background-color: #0f75d3;
-    }
-    .page {
-      display: none;
-      margin-top: 30px;
-    }
-    .match {
-      background-color: #333;
-      border-radius: 15px;
       padding: 20px;
-      width: 80%;
-      max-width: 600px;
-      margin: 20px auto;
-      cursor: pointer;
-      border: 1px solid #555;
     }
-    input {
-      padding: 10px;
+
+    input, select, button {
       margin: 10px;
-      font-size: 16px;
-      background-color: #333333;
-      color: white;
-      border: 1px solid #555;
-      border-radius: 5px;
-    }
-    .countdown, .timestamp {
-      color: #1e90ff;
+      padding: 10px;
       font-size: 16px;
     }
-    .disabled-message {
-      color: red;
-      font-weight: bold;
+
+    table {
+      margin: 20px auto;
+      width: 80%;
+      border-collapse: collapse;
     }
-    .prediction {
-      font-size: 18px;
+
+    th, td {
+      border: 1px solid white;
       padding: 8px;
-      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background-color: #333;
     }
   </style>
 </head>
 <body>
+  <h1>توقع المباراة</h1>
 
-  <div id="homePage" class="page" style="display: block;">
-    <h1>التوقعات</h1>
-    <button onclick="showPage('semisPage')">الأدوار النهائية</button>
-    <button onclick="showPage('finalPage')">النهائي</button>
-  </div>
+  <input type="text" id="name" placeholder="اسمك" />
+  <select id="match">
+    <option value="">اختر المباراة</option>
+    <option value="نصف النهائي 1">نصف النهائي 1</option>
+    <option value="نصف النهائي 2">نصف النهائي 2</option>
+    <option value="النهائي">النهائي</option>
+  </select>
+  <input type="text" id="prediction" placeholder="التوقع (الفريق الفائز)" />
+  <button onclick="submitPrediction()">إرسال التوقع</button>
+  <button onclick="loadPredictions()">عرض التوقعات</button>
 
-  <div id="semisPage" class="page">
-    <h2>الأدوار النهائية</h2>
-    <div class="match" onclick="showPage('match1Page')">العشري × محمود سعد (العودة)</div>
-    <div class="match" onclick="showPage('match2Page')">السلسول × العربي (العودة)</div>
-    <button onclick="showPage('homePage')">⬅ العودة</button>
-  </div>
+  <div id="message"></div>
+  <div id="predictions"></div>
 
-  <div id="finalPage" class="page">
-    <h2>النهائي</h2>
-    <div class="match" onclick="showPage('finalMatchPage')">المستعمرة × السلسول</div>
-    <button onclick="showPage('homePage')">⬅ العودة</button>
-  </div>
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyCe6c5e7_1TBh7cvZrzdIrs8pZ_leWr-XDmSAFtRnRb1z6dxb6X04P3Jl0l7TIGTU/exec";
 
-  <!-- صفحات التوقعات -->
-  <div id="match1Page" class="page">
-    <h2>توقع المباراة: العشري × محمود سعد (العودة)</h2>
-    <div id="countdown1" class="countdown"></div>
-    <div id="timeMessage1" class="disabled-message"></div>
-    <input type="text" id="nameInput1" placeholder="اسمك"><br>
-    <input type="text" id="predictionInput1" placeholder="اكتب توقعك..."><br>
-    <button id="submitBtn1" onclick="submitPrediction(1)">إرسال التوقع</button>
-    <button onclick="showPredictions(1)">عرض التوقعات</button>
-    <button onclick="showPage('semisPage')">⬅ العودة</button>
-    <div id="predictionsPage1" class="page">
-      <h3>التوقعات</h3>
-      <div id="predictionsContainer1"></div>
-      <button onclick="hidePredictions(1)">⬅ العودة</button>
-    </div>
-  </div>
+    function submitPrediction() {
+      const name = document.getElementById("name").value.trim();
+      const prediction = document.getElementById("prediction").value.trim();
+      const match = document.getElementById("match").value;
+      const message = document.getElementById("message");
 
-  <div id="match2Page" class="page">
-    <h2>توقع المباراة: السلسول × العربي (العودة)</h2>
-    <div id="countdown2" class="countdown"></div>
-    <div id="timeMessage2" class="disabled-message"></div>
-    <input type="text" id="nameInput2" placeholder="اسمك"><br>
-    <input type="text" id="predictionInput2" placeholder="اكتب توقعك..."><br>
-    <button id="submitBtn2" onclick="submitPrediction(2)">إرسال التوقع</button>
-    <button onclick="showPredictions(2)">عرض التوقعات</button>
-    <button onclick="showPage('semisPage')">⬅ العودة</button>
-    <div id="predictionsPage2" class="page">
-      <h3>التوقعات</h3>
-      <div id="predictionsContainer2"></div>
-      <button onclick="hidePredictions(2)">⬅ العودة</button>
-    </div>
-  </div>
-
-  <div id="finalMatchPage" class="page">
-    <h2>توقع النهائي: المستعمرة × السلسول</h2>
-    <div id="countdown3" class="countdown"></div>
-    <div id="timeMessage3" class="disabled-message"></div>
-    <input type="text" id="nameInput3" placeholder="اسمك"><br>
-    <input type="text" id="predictionInput3" placeholder="اكتب توقعك..."><br>
-    <button id="submitBtn3" onclick="submitPrediction(3)">إرسال التوقع</button>
-    <button onclick="showPredictions(3)">عرض التوقعات</button>
-    <button onclick="showPage('finalPage')">⬅ العودة</button>
-    <div id="predictionsPage3" class="page">
-      <h3>التوقعات</h3>
-      <div id="predictionsContainer3"></div>
-      <button onclick="hidePredictions(3)">⬅ العودة</button>
-    </div>
-  </div>
-
-<script>
-  const deadlines = {
-    1: new Date("2025-09-15T20:00:00"),
-    2: new Date("2025-09-16T20:00:00"),
-    3: new Date("2025-09-19T20:00:00"),
-  };
-
-  let predictions1 = [], predictions2 = [], predictions3 = [];
-
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-  }
-
-  function formatTimestamp(date) {
-    return date.toLocaleString("ar-EG");
-  }
-
-  function isDeadlinePassed(matchNumber) {
-    return new Date() >= deadlines[matchNumber];
-  }
-
-  function submitPrediction(matchNumber) {
-    if (isDeadlinePassed(matchNumber)) {
-      alert("انتهى وقت التوقعات!");
-      return;
-    }
-
-    const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
-    const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
-    if (!name || !prediction) {
-      alert("من فضلك اكتب اسمك وتوقعك.");
-      return;
-    }
-
-    const key = `predictions_match${matchNumber}`;
-    const list = matchNumber === 1 ? predictions1 : matchNumber === 2 ? predictions2 : predictions3;
-    if (list.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-      alert("❌ هذا الاسم قد أرسل توقعاً بالفعل.");
-      return;
-    }
-
-    const entry = { name, text: prediction, time: formatTimestamp(new Date()) };
-    list.unshift(entry);
-    localStorage.setItem(key, JSON.stringify(list));
-    alert("✅ تم حفظ التوقع.");
-    document.getElementById(`nameInput${matchNumber}`).value = "";
-    document.getElementById(`predictionInput${matchNumber}`).value = "";
-  }
-
-  function showPredictions(matchNumber) {
-    document.getElementById(`predictionsPage${matchNumber}`).style.display = "block";
-    const container = document.getElementById(`predictionsContainer${matchNumber}`);
-    container.innerHTML = "";
-    const key = `predictions_match${matchNumber}`;
-    const saved = localStorage.getItem(key);
-    if (!saved) return container.innerHTML = "<p>لا توجد توقعات بعد.</p>";
-
-    const data = JSON.parse(saved);
-    if (matchNumber === 1) predictions1 = data;
-    else if (matchNumber === 2) predictions2 = data;
-    else predictions3 = data;
-
-    data.forEach((p, i) => {
-      const div = document.createElement("div");
-      div.className = "prediction";
-      div.innerHTML = `<strong>${i + 1}. ${p.name}: ${p.text}</strong><br><span class="timestamp">(${p.time})</span>`;
-      container.appendChild(div);
-    });
-  }
-
-  function hidePredictions(matchNumber) {
-    document.getElementById(`predictionsPage${matchNumber}`).style.display = "none";
-  }
-
-  function disableInputs(matchNumber) {
-    document.getElementById(`nameInput${matchNumber}`).disabled = true;
-    document.getElementById(`predictionInput${matchNumber}`).disabled = true;
-    document.getElementById(`submitBtn${matchNumber}`).disabled = true;
-  }
-
-  function updateCountdown(matchNumber) {
-    const countdown = document.getElementById(`countdown${matchNumber}`);
-    const message = document.getElementById(`timeMessage${matchNumber}`);
-    const now = new Date();
-    const timeLeft = deadlines[matchNumber] - now;
-
-    if (timeLeft <= 0) {
-      countdown.textContent = "";
-      message.textContent = "⚠ انتهى وقت التوقعات!";
-      disableInputs(matchNumber);
-      return;
-    }
-
-    const h = Math.floor(timeLeft / (1000 * 60 * 60));
-    const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
-    countdown.textContent = `الوقت المتبقي: ${h} ساعة و ${m} دقيقة و ${s} ثانية`;
-  }
-
-  window.onload = function () {
-    [1, 2, 3].forEach(num => {
-      const saved = localStorage.getItem(`predictions_match${num}`);
-      if (saved) {
-        if (num === 1) predictions1 = JSON.parse(saved);
-        else if (num === 2) predictions2 = JSON.parse(saved);
-        else predictions3 = JSON.parse(saved);
+      if (!name || !prediction || !match) {
+        message.innerText = "يرجى ملء جميع الحقول";
+        return;
       }
-      updateCountdown(num);
-      setInterval(() => updateCountdown(num), 1000);
-    });
-  };
-</script>
+
+      fetch(`${scriptURL}?name=${encodeURIComponent(name)}&prediction=${encodeURIComponent(prediction)}&match=${encodeURIComponent(match)}`, {
+        method: "POST",
+        mode: "no-cors"
+      })
+      .then(() => {
+        message.innerText = "تم حفظ التوقع بنجاح ✅";
+        document.getElementById("name").value = "";
+        document.getElementById("prediction").value = "";
+        document.getElementById("match").value = "";
+      })
+      .catch(() => {
+        message.innerText = "حدث خطأ أثناء حفظ التوقع ❌";
+      });
+    }
+
+    function loadPredictions() {
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+          if (data.length === 0) {
+            document.getElementById("predictions").innerHTML = "<p>لا توجد توقعات بعد.</p>";
+            return;
+          }
+
+          let table = "<table><tr><th>الاسم</th><th>التوقع</th><th>الوقت</th><th>المباراة</th></tr>";
+          data.forEach(row => {
+            table += `<tr>
+              <td>${row.name}</td>
+              <td>${row.prediction}</td>
+              <td>${new Date(row.time).toLocaleString("ar-EG")}</td>
+              <td>${row.match}</td>
+            </tr>`;
+          });
+          table += "</table>";
+          document.getElementById("predictions").innerHTML = table;
+        })
+        .catch(() => {
+          document.getElementById("predictions").innerHTML = "<p>حدث خطأ أثناء تحميل التوقعات ❌</p>";
+        });
+    }
+  </script>
 </body>
 </html>
