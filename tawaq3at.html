@@ -68,73 +68,73 @@
 </head>
 <body>
 
-  <div id="homePage" class="page" style="display: block;">
-    <h1>التوقعات</h1>
-    <button onclick="showPage('semisPage')">الأدوار النهائية</button>
-    <button onclick="showPage('finalPage')">النهائي</button>
-  </div>
+<div id="homePage" class="page" style="display: block;">
+  <h1>التوقعات</h1>
+  <button onclick="showPage('semisPage')">الأدوار النهائية</button>
+  <button onclick="showPage('finalPage')">النهائي</button>
+</div>
 
-  <div id="semisPage" class="page">
-    <h2>الأدوار النهائية</h2>
-    <div class="match" onclick="showPage('match1Page')">العشري × محمود سعد (العودة)</div>
-    <div class="match" onclick="showPage('match2Page')">السلسول × العربي (العودة)</div>
-    <button onclick="showPage('homePage')">⬅ العودة</button>
-  </div>
+<div id="semisPage" class="page">
+  <h2>الأدوار النهائية</h2>
+  <div class="match" onclick="showPage('match1Page')">العشري × محمود سعد (العودة)</div>
+  <div class="match" onclick="showPage('match2Page')">السلسول × العربي (العودة)</div>
+  <button onclick="showPage('homePage')">⬅ العودة</button>
+</div>
 
-  <div id="finalPage" class="page">
-    <h2>النهائي</h2>
-    <div class="match" onclick="showPage('finalMatchPage')">المستعمرة × السلسول</div>
-    <button onclick="showPage('homePage')">⬅ العودة</button>
-  </div>
+<div id="finalPage" class="page">
+  <h2>النهائي</h2>
+  <div class="match" onclick="showPage('finalMatchPage')">المستعمرة × السلسول</div>
+  <button onclick="showPage('homePage')">⬅ العودة</button>
+</div>
 
-  <!-- صفحات التوقعات -->
-  <div id="match1Page" class="page">
-    <h2>توقع المباراة: العشري × محمود سعد (العودة)</h2>
-    <div id="countdown1" class="countdown"></div>
-    <div id="timeMessage1" class="disabled-message"></div>
-    <input type="text" id="nameInput1" placeholder="اسمك"><br>
-    <input type="text" id="predictionInput1" placeholder="اكتب توقعك..."><br>
-    <button id="submitBtn1" onclick="submitPrediction(1)">إرسال التوقع</button>
-    <button onclick="showPredictions(1)">عرض التوقعات</button>
-    <button onclick="showPage('semisPage')">⬅ العودة</button>
-    <div id="predictionsPage1" class="page">
-      <h3>التوقعات</h3>
-      <div id="predictionsContainer1"></div>
-      <button onclick="hidePredictions(1)">⬅ العودة</button>
-    </div>
+<!-- صفحات التوقعات -->
+<div id="match1Page" class="page">
+  <h2>توقع المباراة: العشري × محمود سعد (العودة)</h2>
+  <div id="countdown1" class="countdown"></div>
+  <div id="timeMessage1" class="disabled-message"></div>
+  <input type="text" id="nameInput1" placeholder="اسمك"><br>
+  <input type="text" id="predictionInput1" placeholder="اكتب توقعك..."><br>
+  <button id="submitBtn1" onclick="submitPrediction(1)">إرسال التوقع</button>
+  <button onclick="showPredictions(1)">عرض التوقعات</button>
+  <button onclick="showPage('semisPage')">⬅ العودة</button>
+  <div id="predictionsPage1" class="page">
+    <h3>التوقعات</h3>
+    <div id="predictionsContainer1"></div>
+    <button onclick="hidePredictions(1)">⬅ العودة</button>
   </div>
+</div>
 
-  <div id="match2Page" class="page">
-    <h2>توقع المباراة: السلسول × العربي (العودة)</h2>
-    <div id="countdown2" class="countdown"></div>
-    <div id="timeMessage2" class="disabled-message"></div>
-    <input type="text" id="nameInput2" placeholder="اسمك"><br>
-    <input type="text" id="predictionInput2" placeholder="اكتب توقعك..."><br>
-    <button id="submitBtn2" onclick="submitPrediction(2)">إرسال التوقع</button>
-    <button onclick="showPredictions(2)">عرض التوقعات</button>
-    <button onclick="showPage('semisPage')">⬅ العودة</button>
-    <div id="predictionsPage2" class="page">
-      <h3>التوقعات</h3>
-      <div id="predictionsContainer2"></div>
-      <button onclick="hidePredictions(2)">⬅ العودة</button>
-    </div>
+<div id="match2Page" class="page">
+  <h2>توقع المباراة: السلسول × العربي (العودة)</h2>
+  <div id="countdown2" class="countdown"></div>
+  <div id="timeMessage2" class="disabled-message"></div>
+  <input type="text" id="nameInput2" placeholder="اسمك"><br>
+  <input type="text" id="predictionInput2" placeholder="اكتب توقعك..."><br>
+  <button id="submitBtn2" onclick="submitPrediction(2)">إرسال التوقع</button>
+  <button onclick="showPredictions(2)">عرض التوقعات</button>
+  <button onclick="showPage('semisPage')">⬅ العودة</button>
+  <div id="predictionsPage2" class="page">
+    <h3>التوقعات</h3>
+    <div id="predictionsContainer2"></div>
+    <button onclick="hidePredictions(2)">⬅ العودة</button>
   </div>
+</div>
 
-  <div id="finalMatchPage" class="page">
-    <h2>توقع النهائي: المستعمرة × السلسول</h2>
-    <div id="countdown3" class="countdown"></div>
-    <div id="timeMessage3" class="disabled-message"></div>
-    <input type="text" id="nameInput3" placeholder="اسمك"><br>
-    <input type="text" id="predictionInput3" placeholder="اكتب توقعك..."><br>
-    <button id="submitBtn3" onclick="submitPrediction(3)">إرسال التوقع</button>
-    <button onclick="showPredictions(3)">عرض التوقعات</button>
-    <button onclick="showPage('finalPage')">⬅ العودة</button>
-    <div id="predictionsPage3" class="page">
-      <h3>التوقعات</h3>
-      <div id="predictionsContainer3"></div>
-      <button onclick="hidePredictions(3)">⬅ العودة</button>
-    </div>
+<div id="finalMatchPage" class="page">
+  <h2>توقع النهائي: المستعمرة × السلسول</h2>
+  <div id="countdown3" class="countdown"></div>
+  <div id="timeMessage3" class="disabled-message"></div>
+  <input type="text" id="nameInput3" placeholder="اسمك"><br>
+  <input type="text" id="predictionInput3" placeholder="اكتب توقعك..."><br>
+  <button id="submitBtn3" onclick="submitPrediction(3)">إرسال التوقع</button>
+  <button onclick="showPredictions(3)">عرض التوقعات</button>
+  <button onclick="showPage('finalPage')">⬅ العودة</button>
+  <div id="predictionsPage3" class="page">
+    <h3>التوقعات</h3>
+    <div id="predictionsContainer3"></div>
+    <button onclick="hidePredictions(3)">⬅ العودة</button>
   </div>
+</div>
 
 <script>
   const deadlines = {
@@ -149,7 +149,6 @@
     document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
     const target = document.getElementById(id);
     if (target) target.style.display = 'block';
-    else console.error("الصفحة غير موجودة:", id);
   }
 
   function formatTimestamp(date) {
@@ -160,67 +159,79 @@
     return new Date() >= deadlines[matchNumber];
   }
 
-  function submitPrediction(matchNumber) {
+  async function sendToGoogle(matchNumber, name, prediction, time) {
+    const url = "https://script.google.com/macros/s/AKfycbyCe6c5e7_1TBh7cvZrzdIrs8pZ_leWr-XDmSAFtRnRb1z6dxb6X04P3Jl0l7TIGTU/exec";
+    const data = { match: matchNumber, name, prediction, time };
     try {
-      if (isDeadlinePassed(matchNumber)) {
-        alert("انتهى وقت التوقعات!");
-        return;
-      }
-
-      const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
-      const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
-
-      console.log("Name:", name);
-      console.log("Prediction:", prediction);
-
-      if (!name || !prediction) {
-        alert("من فضلك اكتب اسمك وتوقعك.");
-        return;
-      }
-
-      const key = `predictions_match${matchNumber}`;
-      const list = matchNumber === 1 ? predictions1 : matchNumber === 2 ? predictions2 : predictions3;
-
-      if (list.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-        alert("❌ هذا الاسم قد أرسل توقعاً بالفعل.");
-        return;
-      }
-
-      const entry = {
-        name,
-        text: prediction,
-        time: formatTimestamp(new Date())
-      };
-
-      list.unshift(entry);
-      localStorage.setItem(key, JSON.stringify(list));
-
-      alert("✅ تم حفظ التوقع.");
-      document.getElementById(`nameInput${matchNumber}`).value = "";
-      document.getElementById(`predictionInput${matchNumber}`).value = "";
+      await fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      return true;
     } catch (err) {
-      console.error("حدث خطأ أثناء إرسال التوقع:", err);
-      alert("❌ حدث خطأ أثناء إرسال التوقع، حاول مرة أخرى.");
+      console.error("خطأ في الإرسال:", err);
+      return false;
     }
   }
 
-  function showPredictions(matchNumber) {
+  async function submitPrediction(matchNumber) {
+    if (isDeadlinePassed(matchNumber)) {
+      alert("انتهى وقت التوقعات!");
+      return;
+    }
+
+    const name = document.getElementById(`nameInput${matchNumber}`).value.trim();
+    const prediction = document.getElementById(`predictionInput${matchNumber}`).value.trim();
+
+    if (!name || !prediction) {
+      alert("من فضلك اكتب اسمك وتوقعك.");
+      return;
+    }
+
+    const time = formatTimestamp(new Date());
+    const success = await sendToGoogle(matchNumber, name, prediction, time);
+
+    if (!success) {
+      alert("❌ لم يتم إرسال التوقع. حاول مرة أخرى.");
+      return;
+    }
+
+    alert("✅ تم إرسال التوقع.");
+    document.getElementById(`nameInput${matchNumber}`).value = "";
+    document.getElementById(`predictionInput${matchNumber}`).value = "";
+  }
+
+  async function getPredictionsFromGoogle(matchNumber) {
+    const url = `https://script.google.com/macros/s/AKfycbyCe6c5e7_1TBh7cvZrzdIrs8pZ_leWr-XDmSAFtRnRb1z6dxb6X04P3Jl0l7TIGTU/exec?match=${matchNumber}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.error("خطأ في جلب التوقعات:", err);
+      return [];
+    }
+  }
+
+  async function showPredictions(matchNumber) {
     document.getElementById(`predictionsPage${matchNumber}`).style.display = "block";
     const container = document.getElementById(`predictionsContainer${matchNumber}`);
-    container.innerHTML = "";
-    const key = `predictions_match${matchNumber}`;
-    const saved = localStorage.getItem(key);
-    if (!saved) return container.innerHTML = "<p>لا توجد توقعات بعد.</p>";
+    container.innerHTML = "<p>جاري تحميل التوقعات...</p>";
 
-    const data = JSON.parse(saved);
-    if (matchNumber === 1) predictions1 = data;
-    else if (matchNumber === 2) predictions2 = data;
-    else predictions3 = data;
+    const data = await getPredictionsFromGoogle(matchNumber);
+    container.innerHTML = "";
+
+    if (!data.length) {
+      container.innerHTML = "<p>لا توجد توقعات بعد.</p>";
+      return;
+    }
 
     data.forEach((p, i) => {
       const div = document.createElement("div");
       div.className = "prediction";
-      div.innerHTML = `<strong>${i + 1}. ${p.name}: ${p.text}</strong><br><span class="timestamp">(${p.time})</span>`;
+      div.innerHTML = `<strong>${i + 1}. ${p.name}: ${p.prediction}</strong><br><span class="timestamp">(${p.time})</span>`;
       container.appendChild(div);
     });
   }
@@ -256,16 +267,10 @@
 
   window.onload = function () {
     [1, 2, 3].forEach(num => {
-      const saved = localStorage.getItem(`predictions_match${num}`);
-      if (saved) {
-        if (num === 1) predictions1 = JSON.parse(saved);
-        else if (num === 2) predictions2 = JSON.parse(saved);
-        else predictions3 = JSON.parse(saved);
-      }
       updateCountdown(num);
       setInterval(() => updateCountdown(num), 1000);
     });
   };
 </script>
 </body>
-</html>
+  </html>
